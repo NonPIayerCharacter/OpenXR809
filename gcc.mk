@@ -5,7 +5,9 @@
 # ----------------------------------------------------------------------------
 # cross compiler
 # ----------------------------------------------------------------------------
-CC_DIR := ~/tools/gcc-arm-none-eabi-4_9-2015q2/bin
+
+# change this path to the toolchain location (I have tested it on Cygwin only)
+CC_DIR := /cygdrive/w/GNU/4.9.2015q2/bin
 CC_PREFIX := $(CC_DIR)/arm-none-eabi-
 
 AS      := $(CC_PREFIX)as
