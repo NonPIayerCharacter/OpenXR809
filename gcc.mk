@@ -79,9 +79,10 @@ else
   CPU := -mcpu=cortex-m3 -mthumb
 endif
 
+# note: I removed -Werror to allow warnings not as errors
 CC_FLAGS = $(CPU) -c $(DBG_FLAG) -fno-common -fmessage-length=0 \
 	-fno-exceptions -ffunction-sections -fdata-sections -fomit-frame-pointer \
-	-Wall -Werror -Wpointer-arith -Wno-error=unused-function \
+	-Wall -Wpointer-arith -Wno-error=unused-function \
 	-MMD -MP $(OPTIMIZE_FLAG)
 	
 	
