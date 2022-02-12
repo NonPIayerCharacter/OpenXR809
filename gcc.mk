@@ -83,6 +83,10 @@ CC_FLAGS = $(CPU) -c $(DBG_FLAG) -fno-common -fmessage-length=0 \
 	-fno-exceptions -ffunction-sections -fdata-sections -fomit-frame-pointer \
 	-Wall -Werror -Wpointer-arith -Wno-error=unused-function \
 	-MMD -MP $(OPTIMIZE_FLAG)
+	
+	
+# flag 
+CC_FLAGS += -DPLATFORM_XR809=1
 
 LD_FLAGS = $(CPU) -Wl,--gc-sections --specs=nano.specs \
 	-Wl,-Map=$(basename $@).map,--cref
