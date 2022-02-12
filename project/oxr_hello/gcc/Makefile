@@ -28,6 +28,10 @@ DIRS += $(ROOT_PATH)/project/common/board/$(__PRJ_CONFIG_BOARD)
 
 SRCS := $(basename $(foreach dir,$(DIRS),$(wildcard $(dir)/*.[csS])))
 
+$(info    Now will print SCRS list)
+$(info    SRCS is $(SRCS))
+$(info    SCRs list printed)
+
 OBJS := $(addsuffix .o,$(SRCS))
 
 # extra libs

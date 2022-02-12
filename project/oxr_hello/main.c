@@ -47,6 +47,9 @@ static void helloworld_task(void *arg)
 
 	while (1) {
 		OS_Sleep(1);
+		serial_write("Serial test!\n\r", strlen("Serial test!\n\r"));
+		OS_Sleep(1);
+		printf("helloworld_task runs...\n");
 	}
 
 	printf("helloworld_task exit\n");
@@ -61,6 +64,12 @@ int main(void)
 	serial_init(SERIAL_UART_ID, 115200, UART_DATA_BITS_8, UART_PARITY_NONE, UART_STOP_BITS_1, 1);
 
 	serial_start();
+	
+	OS_Sleep(1);
+
+	printf("Serial test from main!\n\r");
+
+	OS_Sleep(1);
 
 	/* start helloworld task */
 	if (OS_ThreadCreate(&g_helloworld_thread,

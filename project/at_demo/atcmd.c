@@ -43,6 +43,9 @@ static void atcmd_task(void *arg)
 {
 	ATCMD_DBG("%s() start...\n", __func__);
 
+	//serial_write("Serial write from atcmd_task()\r\n",strlen("Serial write from atcmd_task()\r\n"));
+	printf("Printf from atcmd_task\r\n");
+
 	while (1) {
 		at_cmd_exec();
 	}
@@ -63,6 +66,13 @@ void atcmd_start(void)
 	serial_init(SERIAL_UART_ID, para.baudrate, UART_DATA_BITS_8, UART_PARITY_NONE, UART_STOP_BITS_1, para.hwfc);
 
 	serial_start();
+
+	OS_Sleep(1);
+
+	//serial_write("Serial write from atcmd_start()\r\n",strlen("Serial write from atcmd_start()\r\n"));
+	printf("Printf test\r\n");
+
+	OS_Sleep(1);
 
 	/* start atcmd task */
 	if (OS_ThreadCreate(&g_atcmd_thread,
