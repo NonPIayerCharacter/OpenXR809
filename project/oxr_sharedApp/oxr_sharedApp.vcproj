@@ -171,6 +171,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\prv_config.h"
+				>
+			</File>
+			<File
 				RelativePath=".\serial.h"
 				>
 			</File>
@@ -236,6 +240,58 @@
 			</File>
 			<File
 				RelativePath=".\serial.c"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="Shared Files"
+			>
+			<File
+				RelativePath=".\shared\src\httpserver\http_tcp_server.c"
+				>
+			</File>
+			<File
+				RelativePath=".\shared\src\jsmn\jsmn.c"
+				>
+			</File>
+			<File
+				RelativePath=".\shared\src\jsmn\jsmn.h"
+				>
+			</File>
+			<File
+				RelativePath=".\shared\src\jsmn\jsmn_h.h"
+				>
+			</File>
+			<File
+				RelativePath=".\shared\src\logging\logging.c"
+				>
+			</File>
+			<File
+				RelativePath=".\shared\src\logging\logging.h"
+				>
+			</File>
+			<File
+				RelativePath=".\shared\src\new_builtin_devices.c"
+				>
+			</File>
+			<File
+				RelativePath=".\shared\src\new_cfg.c"
+				>
+			</File>
+			<File
+				RelativePath=".\shared\src\new_cfg.h"
+				>
+			</File>
+			<File
+				RelativePath=".\shared\src\new_common.c"
+				>
+			</File>
+			<File
+				RelativePath=".\shared\src\httpserver\new_http.c"
+				>
+			</File>
+			<File
+				RelativePath=".\shared\src\new_pins.c"
 				>
 			</File>
 		</Filter>
