@@ -36,6 +36,7 @@
 
 #include "common/framework/platform_init.h"
 #include "serial.h"
+#include "shared/src/new_pins.h"
 
 #include "kernel/os/os.h"
 
@@ -64,6 +65,7 @@ static void helloworld_task(void *arg)
 
 	while (1) {
 		OS_Sleep(1);
+		MQTT_RunEverySecondUpdate();
 		g_upTime++;
 	}
 
@@ -119,8 +121,14 @@ int main(void)
 
 	serial_start();
 
-	OS_Sleep(1);
+	CFG_SetMQTTHost(DEFAULT_MQTT_IP);
+	CFG_SetMQTTUserName(DEFAULT_MQTT_USER);
+	CFG_SetMQTTPass(DEFAULT_MQTT_PASS);
 
+	PIN_SetPinRoleForPinIndex(0, IOR_Relay);
+	PIN_SetPinChannelForPinIndex(0,1);
+
+	OS_Sleep(1);
 	printf("Serial test from main!\n\r");
 
 	OS_Sleep(1);
