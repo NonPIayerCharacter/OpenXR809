@@ -88,6 +88,11 @@ struct sysinfo_mqtt_param
 	char hostName[64];
 	char pass[128];    
 };
+// added for OpenXR809
+typedef struct xr_pinsState_s {
+	uint8_t roles[32];
+	uint8_t channels[32];
+} xr_pinsState_t;
 
 
 /**
@@ -128,6 +133,11 @@ typedef struct sysinfo {
 	struct sysinfo_netif_param netif_ap_param;
 	// inf->mqtt_param
 	struct sysinfo_mqtt_param mqtt_param;
+	// inf->pins
+	struct xr_pinsState_s pins;
+
+	int checksum;
+
 #endif
 } sysinfo_t;
 
@@ -144,6 +154,12 @@ int sysinfo_load(void);
 #endif
 
 struct sysinfo *sysinfo_get(void);
+
+// OpenXR809: this is only in OpenXR809 app project
+// It's a not the best way to organise it but let's say 
+// it works for now
+int sysinfo_save_wrapper(void);
+int sysinfo_checksum(sysinfo_t *inf);
 
 #ifdef __cplusplus
 }

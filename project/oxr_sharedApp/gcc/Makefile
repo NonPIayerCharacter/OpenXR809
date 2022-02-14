@@ -34,6 +34,7 @@ SRCS += ../shared/src/new_builtin_devices
 SRCS += ../shared/src/httpserver/new_http
 SRCS += ../shared/src/httpserver/http_tcp_server
 SRCS += ../shared/src/mqtt/new_mqtt
+SRCS += ../shared/src/tiny_crc8
 
 $(info    Now will print SCRS list)
 $(info    SRCS is $(SRCS))

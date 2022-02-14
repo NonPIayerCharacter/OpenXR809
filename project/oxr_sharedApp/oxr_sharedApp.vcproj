@@ -239,6 +239,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\my_lwip2_mqtt_replacement.c"
+				>
+			</File>
+			<File
 				RelativePath=".\serial.c"
 				>
 			</File>
@@ -246,6 +250,14 @@
 		<Filter
 			Name="Shared Files"
 			>
+			<File
+				RelativePath=".\shared\src\flash_config\flash_config.c"
+				>
+			</File>
+			<File
+				RelativePath=".\shared\src\flash_config\flash_config.h"
+				>
+			</File>
 			<File
 				RelativePath=".\shared\src\httpserver\http_tcp_server.c"
 				>
@@ -268,6 +280,10 @@
 			</File>
 			<File
 				RelativePath=".\shared\src\logging\logging.h"
+				>
+			</File>
+			<File
+				RelativePath=".\my_lwip2_mqtt_replacement.h"
 				>
 			</File>
 			<File
@@ -302,6 +318,14 @@
 				RelativePath=".\shared\src\new_pins.c"
 				>
 			</File>
+			<File
+				RelativePath=".\shared\src\tiny_crc8.c"
+				>
+			</File>
+			<File
+				RelativePath=".\shared\src\user_main.c"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="MakeStuff"
@@ -312,6 +336,38 @@
 			</File>
 			<File
 				RelativePath=".\gcc\Makefile"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="lwip2"
+			>
+			<File
+				RelativePath="..\..\src\net\lwip-2.0.3\src\core\ipv4\ip4_addr.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\net\lwip-2.0.3\src\apps\mqtt\mqtt.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\include\net\lwip-2.0.3\lwip\apps\mqtt.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\include\net\lwip-2.0.3\lwip\apps\mqtt_opts.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="Common"
+			>
+			<File
+				RelativePath="..\common\framework\sysinfo.c"
+				>
+			</File>
+			<File
+				RelativePath="..\common\framework\sysinfo.h"
 				>
 			</File>
 		</Filter>

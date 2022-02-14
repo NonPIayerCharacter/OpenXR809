@@ -37,12 +37,13 @@
 #include "common/framework/platform_init.h"
 // XR809 sysinfo is used to save configuration to flash
 #include "common/framework/sysinfo.h"
+#include "common/framework/net_ctrl.h"
 #include "serial.h"
+#include "shared/src/new_cfg.h"
 #include "shared/src/new_pins.h"
+#include "shared/src/mqtt/new_mqtt.h"
 
 #include "kernel/os/os.h"
-
-#include "prv_config.h"
 
 #define HELLOWORLD_THREAD_STACK_SIZE	(1 * 1024)
 static OS_Thread_t g_helloworld_thread;
@@ -74,11 +75,10 @@ static void helloworld_task(void *arg)
 	printf("helloworld_task exit\n");
 	OS_ThreadDelete(&g_helloworld_thread);
 }
-char g_xr3_ssid [128] =  DEFAULT_WIFI_SSID;
-static void connectToWiFi()
+static void connectToWiFi(const char *ssid, const char *psk)
 {
-	const char *ssid = g_xr3_ssid;    /* set your AP's ssid */
-	const char *psk = DEFAULT_WIFI_PASS; /* set your AP's password */
+	wlan_ap_disable();
+	net_switch_mode(WLAN_MODE_STA);
 
 	/* set ssid and password to wlan */
 	wlan_sta_set((uint8_t *)ssid, strlen(ssid), (uint8_t *)psk);
@@ -87,7 +87,17 @@ static void connectToWiFi()
 	wlan_sta_enable();
 
 	//OS_Sleep(60);
-	at_dump("ok set wifii\n\r");
+	printf("ok set wifii\n\r");
+}
+static void setupOpenAccessPoint() {
+	char ap_ssid[32];
+	char ap_psk[] = "12345678";
+
+	net_switch_mode(WLAN_MODE_HOSTAP);
+	wlan_ap_disable();
+	snprintf((char *)ap_ssid, sizeof(ap_ssid), "xr-ap-12345");
+	wlan_ap_set((uint8_t *)ap_ssid, strlen(ap_ssid), (uint8_t *)ap_psk);
+	wlan_ap_enable();
 }
 
 #define MAX_DUMP_BUFF_SIZE 256
@@ -95,22 +105,20 @@ static void connectToWiFi()
 char dump_buffer[MAX_DUMP_BUFF_SIZE];
 
 void addLog(char *format, ...){
-    int len;
     va_list vp;
 
     va_start(vp, format);
-    len = vsnprintf(dump_buffer, MAX_DUMP_BUFF_SIZE, format, vp);
+    vsnprintf(dump_buffer, MAX_DUMP_BUFF_SIZE, format, vp);
     va_end(vp);
 
 	printf("%s\r\n",dump_buffer);
 }
 
 void addLogAdv(int level, int feature, char *format, ...){
-    int len;
     va_list vp;
 
     va_start(vp, format);
-    len = vsnprintf(dump_buffer, MAX_DUMP_BUFF_SIZE, format, vp);
+    vsnprintf(dump_buffer, MAX_DUMP_BUFF_SIZE, format, vp);
     va_end(vp);
 
 	printf("%s\r\n",dump_buffer);
@@ -119,6 +127,11 @@ int main(void)
 {
 	int res;
 	sysinfo_t *inf;
+	int bForceOpenAP;
+	const char *wifi_ssid;
+	const char *wifi_pass;
+
+	bForceOpenAP = 0;
 
 	platform_init();
 
@@ -126,7 +139,7 @@ int main(void)
 
 	serial_start();
 
-	OS_Sleep(1);
+	OS_MSleep(10);
 
 	res = sysinfo_init();
 	if(res != 0) {
@@ -138,28 +151,63 @@ int main(void)
 	}
 	inf = sysinfo_get();
 	if(inf == 0) {
-		printf("sysinfo_get returned 0!\n\r",res);
+		printf("sysinfo_get returned 0!\n\r");
 	}
+	if(inf->checksum != sysinfo_checksum(inf)) {
+		printf("sysinfo checksum invalid, resetting!\n\r");
+		inf->wlan_sta_param.ssid[0] = 0;
+		inf->wlan_sta_param.psk[0] = 0;
+		memset(&inf->pins,0,sizeof(inf->pins));
+		strcpy(inf->mqtt_param.brokerName,"brokerName");
+		strcpy(inf->mqtt_param.userName,"userName");
+		strcpy(inf->mqtt_param.hostName,"192.168.0.123");
+		strcpy(inf->mqtt_param.pass,"P@ssw0rd");
+		inf->mqtt_param.port = 1883;
+		sysinfo_save_wrapper();
+	} else {
+		printf("sysinfo checksum OK, loading!\n\r");
+	}
+	OS_MSleep(10);
+
+
 	printf("SYSINFO_SSID_LEN_MAX %i\n\r",SYSINFO_SSID_LEN_MAX);
 	printf("inf->wlan_sta_param.ssid %s\n\r",inf->wlan_sta_param.ssid);
+	printf("inf->wlan_sta_param.psk %s\n\r",inf->wlan_sta_param.psk);
 			
+	OS_MSleep(10);
+
 	CFG_InitAndLoad();
 
 	//CFG_SetMQTTHost(DEFAULT_MQTT_IP);
 	//CFG_SetMQTTUserName(DEFAULT_MQTT_USER);
 	//CFG_SetMQTTPass(DEFAULT_MQTT_PASS);
 
-	PIN_SetPinRoleForPinIndex(0, IOR_Relay);
-	PIN_SetPinChannelForPinIndex(0,1);
+	//PIN_SetPinRoleForPinIndex(0, IOR_Relay);
+	//PIN_SetPinChannelForPinIndex(0,1);
 
+	OS_MSleep(10);
+	wifi_ssid = CFG_GetWiFiSSID();
+	wifi_pass = CFG_GetWiFiPass();
+#if 0
+	// you can use this if you bricked your module by setting wrong access point data
+	wifi_ssid = "qqqqqqqqqq";
+	wifi_pass = "Fqqqqqqqqqqqqqqqqqqqqqqqqqqq"
+#endif
+#ifdef SPECIAL_UNBRICK_ALWAYS_OPEN_AP
+	// you can use this if you bricked your module by setting wrong access point data
+	bForceOpenAP = 1;
+#endif
+	if(*wifi_ssid == 0 || *wifi_pass == 0 || bForceOpenAP) {
+		setupOpenAccessPoint();
+	} else {
+		connectToWiFi(wifi_ssid,wifi_pass);
+	}
 
-	connectToWiFi();
-
-	OS_Sleep(1);
+	OS_MSleep(10);
 
 	start_tcp_http();
 
-	OS_Sleep(1);
+	OS_MSleep(10);
 
 
 	/* start helloworld task */
