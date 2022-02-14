@@ -79,6 +79,17 @@ struct sysinfo_wlan_ap_param {
 	uint8_t channel;
 };
 
+// added for OpenXR809
+struct sysinfo_mqtt_param
+{
+	char brokerName[64];
+	char userName[64];
+	int port;
+	char hostName[64];
+	char pass[128];    
+};
+
+
 /**
  * @brief Sysinfo net interface parameters definition
  */
@@ -100,7 +111,7 @@ struct sysinfo_netif_param {
 /**
  * @brief Sysinfo structure definition
  */
-struct sysinfo {
+typedef struct sysinfo {
 	uint32_t version;
 
 #if PRJCONF_NET_EN
@@ -115,8 +126,10 @@ struct sysinfo {
 
 	struct sysinfo_netif_param netif_sta_param;
 	struct sysinfo_netif_param netif_ap_param;
+	// inf->mqtt_param
+	struct sysinfo_mqtt_param mqtt_param;
 #endif
-};
+} sysinfo_t;
 
 #define SYSINFO_SIZE	sizeof(struct sysinfo)
 

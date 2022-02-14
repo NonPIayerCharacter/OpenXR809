@@ -35,6 +35,8 @@
 #include <stdarg.h>
 
 #include "common/framework/platform_init.h"
+// XR809 sysinfo is used to save configuration to flash
+#include "common/framework/sysinfo.h"
 #include "serial.h"
 #include "shared/src/new_pins.h"
 
@@ -72,9 +74,10 @@ static void helloworld_task(void *arg)
 	printf("helloworld_task exit\n");
 	OS_ThreadDelete(&g_helloworld_thread);
 }
+char g_xr3_ssid [128] =  DEFAULT_WIFI_SSID;
 static void connectToWiFi()
 {
-	const char *ssid = DEFAULT_WIFI_SSID;    /* set your AP's ssid */
+	const char *ssid = g_xr3_ssid;    /* set your AP's ssid */
 	const char *psk = DEFAULT_WIFI_PASS; /* set your AP's password */
 
 	/* set ssid and password to wlan */
@@ -112,26 +115,43 @@ void addLogAdv(int level, int feature, char *format, ...){
 
 	printf("%s\r\n",dump_buffer);
 }
-
 int main(void)
 {
+	int res;
+	sysinfo_t *inf;
+
 	platform_init();
 
 	serial_init(SERIAL_UART_ID, 115200, UART_DATA_BITS_8, UART_PARITY_NONE, UART_STOP_BITS_1, 1);
 
 	serial_start();
 
-	CFG_SetMQTTHost(DEFAULT_MQTT_IP);
-	CFG_SetMQTTUserName(DEFAULT_MQTT_USER);
-	CFG_SetMQTTPass(DEFAULT_MQTT_PASS);
+	OS_Sleep(1);
+
+	res = sysinfo_init();
+	if(res != 0) {
+		printf("sysinfo_init error - %i!\n\r",res);
+	}
+	res = sysinfo_load();
+	if(res != 0) {
+		printf("sysinfo_load error - %i!\n\r",res);
+	}
+	inf = sysinfo_get();
+	if(inf == 0) {
+		printf("sysinfo_get returned 0!\n\r",res);
+	}
+	printf("SYSINFO_SSID_LEN_MAX %i\n\r",SYSINFO_SSID_LEN_MAX);
+	printf("inf->wlan_sta_param.ssid %s\n\r",inf->wlan_sta_param.ssid);
+			
+	CFG_InitAndLoad();
+
+	//CFG_SetMQTTHost(DEFAULT_MQTT_IP);
+	//CFG_SetMQTTUserName(DEFAULT_MQTT_USER);
+	//CFG_SetMQTTPass(DEFAULT_MQTT_PASS);
 
 	PIN_SetPinRoleForPinIndex(0, IOR_Relay);
 	PIN_SetPinChannelForPinIndex(0,1);
 
-	OS_Sleep(1);
-	printf("Serial test from main!\n\r");
-
-	OS_Sleep(1);
 
 	connectToWiFi();
 
