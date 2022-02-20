@@ -169,8 +169,9 @@ int main(void)
 	}
 	OS_MSleep(10);
 
-
+	printf("PRJCONF_SYSINFO_ADDR %i\n\r",PRJCONF_SYSINFO_ADDR);
 	printf("SYSINFO_SSID_LEN_MAX %i\n\r",SYSINFO_SSID_LEN_MAX);
+	OS_MSleep(10);
 	printf("inf->wlan_sta_param.ssid %s\n\r",inf->wlan_sta_param.ssid);
 	printf("inf->wlan_sta_param.psk %s\n\r",inf->wlan_sta_param.psk);
 			
