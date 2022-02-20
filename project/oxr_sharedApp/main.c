@@ -178,6 +178,7 @@ int main(void)
 
 	CFG_InitAndLoad();
 
+	PIN_Init();
 	//CFG_SetMQTTHost(DEFAULT_MQTT_IP);
 	//CFG_SetMQTTUserName(DEFAULT_MQTT_USER);
 	//CFG_SetMQTTPass(DEFAULT_MQTT_PASS);
