@@ -48,6 +48,11 @@
 #define HELLOWORLD_THREAD_STACK_SIZE	(1 * 1024)
 static OS_Thread_t g_helloworld_thread;
 
+char g_xr809_ota_request[256] = { 0 };
+
+void xr809_do_ota_next_frame(const char *s) {
+	strcpy(g_xr809_ota_request,s);
+}
 //void os_strcpy(char *dst, const char *src) {
 //	strcpy(dst,src);
 //}
@@ -70,6 +75,14 @@ static void helloworld_task(void *arg)
 		OS_Sleep(1);
 		MQTT_RunEverySecondUpdate();
 		g_upTime++;
+		if(xr809_do_ota_next_frame[0] != 0) {
+			printf("XR809 main loop now is starting OTA!\n");
+			OS_MSleep(10);
+			printf("URL %s\n",xr809_do_ota_next_frame);
+			OS_MSleep(10);
+			cmd_ota_http_exec(xr809_do_ota_next_frame);
+			break;
+		}
 	}
 
 	printf("helloworld_task exit\n");
