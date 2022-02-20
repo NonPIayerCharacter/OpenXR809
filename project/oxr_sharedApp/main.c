@@ -78,7 +78,7 @@ static void helloworld_task(void *arg)
 		if(g_xr809_ota_request[0] != 0) {
 			printf("XR809 main loop now is starting OTA!\n");
 			OS_MSleep(10);
-			printf("URL %s\n",xr809_do_ota_next_frame);
+			printf("URL %s\n",g_xr809_ota_request);
 			OS_MSleep(10);
 			cmd_ota_http_exec(xr809_do_ota_next_frame);
 			break;
