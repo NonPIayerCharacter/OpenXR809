@@ -37,8 +37,8 @@
 extern "C" {
 #endif
 
-#define OTA_DBG_ON		0
-#define OTA_WRN_ON		0
+#define OTA_DBG_ON		1
+#define OTA_WRN_ON		1
 #define OTA_ERR_ON		1
 #define OTA_ABORT_ON	0
 

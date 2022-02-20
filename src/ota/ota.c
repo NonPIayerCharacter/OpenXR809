@@ -132,11 +132,14 @@ static ota_status_t ota_update_image_process(image_seq_t seq, void *url,
 
 	OTA_DBG("%s(), erase flash success\n", __func__);
 
+	OTA_DBG("%s(), now will malloc memory %i\n", __func__, OTA_BUF_SIZE);
+
 	ota_buf = ota_malloc(OTA_BUF_SIZE);
 	if (ota_buf == NULL) {
 		OTA_ERR("no mem\n");
 		return ret;
 	}
+	OTA_DBG("%s(), now will call init_cb\n", __func__);
 
 	if (init_cb(url) != OTA_STATUS_OK) {
 		OTA_ERR("ota update init failed\n");
