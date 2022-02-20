@@ -75,7 +75,7 @@ static void helloworld_task(void *arg)
 		OS_Sleep(1);
 		MQTT_RunEverySecondUpdate();
 		g_upTime++;
-		if(xr809_do_ota_next_frame[0] != 0) {
+		if(g_xr809_ota_request[0] != 0) {
 			printf("XR809 main loop now is starting OTA!\n");
 			OS_MSleep(10);
 			printf("URL %s\n",xr809_do_ota_next_frame);
