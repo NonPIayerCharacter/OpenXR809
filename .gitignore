@@ -16,3 +16,6 @@
 /project/*/gcc/*.dep
 /project/*/gcc/*.build_log.htm
 /project/*/gcc/mdk_debug/*.uvguix.*
+
+/project/oxr_sharedApp/shared
+/tools/gcc-*
