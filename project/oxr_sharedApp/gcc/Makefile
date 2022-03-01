@@ -33,6 +33,7 @@ SRCS += ../shared/src/new_common
 SRCS += ../shared/src/new_builtin_devices
 SRCS += ../shared/src/httpserver/new_http
 SRCS += ../shared/src/httpserver/http_tcp_server
+SRCS += ../shared/src/httpserver/http_fns
 SRCS += ../shared/src/mqtt/new_mqtt
 SRCS += ../shared/src/tiny_crc8
 
