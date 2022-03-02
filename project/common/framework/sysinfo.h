@@ -92,6 +92,7 @@ struct sysinfo_mqtt_param
 typedef struct xr_pinsState_s {
 	uint8_t roles[32];
 	uint8_t channels[32];
+	uint8_t channels2[32];
 } xr_pinsState_t;
 
 
