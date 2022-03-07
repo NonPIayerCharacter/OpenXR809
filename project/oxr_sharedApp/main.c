@@ -59,15 +59,15 @@ OSStatus rtos_create_thread( beken_thread_t* thread,
 	err = OS_ThreadCreate(thread,
 		                name,
 		                function,
-		                NULL,
-		                OS_THREAD_PRIO_CONSOLE,
+		                arg,
+		                new_priority,
 		                stack_size);
 
 	return err;
 }
 
 OSStatus rtos_delete_thread( beken_thread_t* thread ) {
-    return rtos_delete_thread( thread );
+    return OS_ThreadDelete( thread );
 }
 
 #define HELLOWORLD_THREAD_STACK_SIZE	(1 * 1024)
@@ -141,6 +141,22 @@ static void setupOpenAccessPoint() {
 #define MAX_DUMP_BUFF_SIZE 256
 char dump_buffer[MAX_DUMP_BUFF_SIZE];
 
+void RESET_ScheduleModuleReset(int delaySeconds) {
+
+
+}
+static char g_ipStr[32];
+const char *getMyIp() {
+	strcpy(g_ipStr,inet_ntoa(g_wlan_netif->ip_addr));
+
+	return g_ipStr;
+}
+const char *getMACStr(char *macstr) {
+	unsigned char mac[32];
+	WiFI_GetMacAddress((char *)mac);
+	sprintf(macstr,"%02X%02X%02X%02X%02X%02X",mac[0],mac[1],mac[2],mac[3],mac[4],mac[5]);
+	return macstr;
+}
 void bk_printf(char *format, ...){
     va_list vp;
 
@@ -229,6 +245,7 @@ int main(void)
 	CFG_InitAndLoad();
 
 	PIN_Init();
+	init_rest();
 	//CFG_SetMQTTHost(DEFAULT_MQTT_IP);
 	//CFG_SetMQTTUserName(DEFAULT_MQTT_USER);
 	//CFG_SetMQTTPass(DEFAULT_MQTT_PASS);

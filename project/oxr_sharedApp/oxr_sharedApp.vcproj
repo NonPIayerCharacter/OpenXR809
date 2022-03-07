@@ -267,6 +267,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\shared\src\httpserver\http_fns.c"
+				>
+			</File>
+			<File
 				RelativePath=".\shared\src\httpserver\http_tcp_server.c"
 				>
 			</File>
@@ -332,6 +336,18 @@
 			</File>
 			<File
 				RelativePath=".\shared\src\new_pins.c"
+				>
+			</File>
+			<File
+				RelativePath=".\shared\src\printnetinfo\printnetinfo.c"
+				>
+			</File>
+			<File
+				RelativePath=".\shared\src\httpserver\rest_interface.c"
+				>
+			</File>
+			<File
+				RelativePath=".\shared\src\httpserver\rest_interface.h"
 				>
 			</File>
 			<File
