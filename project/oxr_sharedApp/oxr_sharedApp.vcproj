@@ -371,6 +371,54 @@
 				>
 			</File>
 		</Filter>
+		<Filter
+			Name="SDK"
+			>
+			<File
+				RelativePath="..\..\src\image\fdcm.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\image\flash.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\image\image.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\image\image_debug.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\ota\ota.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\ota\ota_debug.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\ota\ota_file.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\ota\ota_file.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\ota\ota_http.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\ota\ota_http.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\ota\ota_i.h"
+				>
+			</File>
+		</Filter>
 	</Files>
 	<Globals>
 	</Globals>

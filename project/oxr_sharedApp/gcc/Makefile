@@ -36,6 +36,9 @@ SRCS += ../shared/src/httpserver/http_tcp_server
 SRCS += ../shared/src/httpserver/http_fns
 SRCS += ../shared/src/mqtt/new_mqtt
 SRCS += ../shared/src/tiny_crc8
+SRCS += ../shared/src/new_cmd
+SRCS += ../shared/src/drv_tuyaMCU
+
 
 $(info    Now will print SCRS list)
 $(info    SRCS is $(SRCS))
