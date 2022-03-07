@@ -251,6 +251,14 @@
 			Name="Shared Files"
 			>
 			<File
+				RelativePath=".\shared\src\drv_tuyaMCU.c"
+				>
+			</File>
+			<File
+				RelativePath=".\shared\src\drv_tuyaMCU.h"
+				>
+			</File>
+			<File
 				RelativePath=".\shared\src\flash_config\flash_config.c"
 				>
 			</File>
@@ -296,6 +304,14 @@
 			</File>
 			<File
 				RelativePath=".\shared\src\new_cfg.h"
+				>
+			</File>
+			<File
+				RelativePath=".\shared\src\new_cmd.c"
+				>
+			</File>
+			<File
+				RelativePath=".\shared\src\new_cmd.h"
 				>
 			</File>
 			<File

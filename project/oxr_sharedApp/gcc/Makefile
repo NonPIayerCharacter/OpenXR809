@@ -34,6 +34,7 @@ SRCS += ../shared/src/new_builtin_devices
 SRCS += ../shared/src/httpserver/new_http
 SRCS += ../shared/src/httpserver/http_tcp_server
 SRCS += ../shared/src/httpserver/http_fns
+SRCS += ../shared/src/logging/logging
 SRCS += ../shared/src/mqtt/new_mqtt
 SRCS += ../shared/src/tiny_crc8
 SRCS += ../shared/src/new_cmd
@@ -66,8 +67,8 @@ LINKER_SCRIPT := ./xr809_appos.ld
 #   - relative to "../image/xxxxx/", eg. "../image/xr871/"
 #   - define your own "IMAGE_CFG_PATH" and/or "IMAGE_CFG" to override the
 #     default one
-# IMAGE_CFG_PATH := .
-# IMAGE_CFG :=
+IMAGE_CFG_PATH := ./image/xr809/
+IMAGE_CFG := image_auto_cal.cfg
 
 # image name, default to xr_system
 # IMAGE_NAME :=

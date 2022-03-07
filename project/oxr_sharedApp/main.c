@@ -42,8 +42,33 @@
 #include "shared/src/new_cfg.h"
 #include "shared/src/new_pins.h"
 #include "shared/src/mqtt/new_mqtt.h"
+#include "shared/src/new_common.h"
 
 #include "kernel/os/os.h"
+
+
+OSStatus rtos_create_thread( beken_thread_t* thread, 
+							uint8_t priority, const char* name, 
+							beken_thread_function_t function,
+							uint32_t stack_size, beken_thread_arg_t arg ) {
+    OSStatus err = kNoErr;
+	int new_priority;
+	// TODO: translate
+	new_priority = OS_THREAD_PRIO_CONSOLE;
+
+	err = OS_ThreadCreate(thread,
+		                name,
+		                function,
+		                NULL,
+		                OS_THREAD_PRIO_CONSOLE,
+		                stack_size);
+
+	return err;
+}
+
+OSStatus rtos_delete_thread( beken_thread_t* thread ) {
+    return rtos_delete_thread( thread );
+}
 
 #define HELLOWORLD_THREAD_STACK_SIZE	(1 * 1024)
 static OS_Thread_t g_helloworld_thread;
@@ -114,10 +139,9 @@ static void setupOpenAccessPoint() {
 }
 
 #define MAX_DUMP_BUFF_SIZE 256
-
 char dump_buffer[MAX_DUMP_BUFF_SIZE];
 
-void addLog(char *format, ...){
+void bk_printf(char *format, ...){
     va_list vp;
 
     va_start(vp, format);
@@ -126,16 +150,28 @@ void addLog(char *format, ...){
 
 	printf("%s\r\n",dump_buffer);
 }
-
-void addLogAdv(int level, int feature, char *format, ...){
-    va_list vp;
-
-    va_start(vp, format);
-    vsnprintf(dump_buffer, MAX_DUMP_BUFF_SIZE, format, vp);
-    va_end(vp);
-
-	printf("%s\r\n",dump_buffer);
-}
+//
+//char dump_buffer[MAX_DUMP_BUFF_SIZE];
+//
+//void addLog(char *format, ...){
+//    va_list vp;
+//
+//    va_start(vp, format);
+//    vsnprintf(dump_buffer, MAX_DUMP_BUFF_SIZE, format, vp);
+//    va_end(vp);
+//
+//	printf("%s\r\n",dump_buffer);
+//}
+//
+//void addLogAdv(int level, int feature, char *format, ...){
+//    va_list vp;
+//
+//    va_start(vp, format);
+//    vsnprintf(dump_buffer, MAX_DUMP_BUFF_SIZE, format, vp);
+//    va_end(vp);
+//
+//	printf("%s\r\n",dump_buffer);
+//}
 int main(void)
 {
 	int res;
