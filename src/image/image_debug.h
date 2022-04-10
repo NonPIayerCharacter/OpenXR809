@@ -37,8 +37,8 @@
 extern "C" {
 #endif
 
-#define IMAGE_DBG_ON    0
-#define IMAGE_WRN_ON    0
+#define IMAGE_DBG_ON    1
+#define IMAGE_WRN_ON    1
 #define IMAGE_ERR_ON    1
 #define IMAGE_ABORT_ON  0
 
@@ -47,8 +47,8 @@ extern "C" {
 #define FDCM_ERR_ON     1
 #define FDCM_ABORT_ON   0
 
-#define FLASH_DBG_ON    0
-#define FLASH_WRN_ON    0
+#define FLASH_DBG_ON    1
+#define FLASH_WRN_ON    1
 #define FLASH_ERR_ON    1
 #define FLASH_ABORT_ON  0
 

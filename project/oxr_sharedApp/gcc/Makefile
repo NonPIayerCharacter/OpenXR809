@@ -41,6 +41,7 @@ SRCS += ../shared/src/mqtt/new_mqtt
 SRCS += ../shared/src/tiny_crc8
 SRCS += ../shared/src/new_cmd
 SRCS += ../shared/src/drv_tuyaMCU
+SRCS += ../shared/src/new_tokenizer
 
 
 $(info    Now will print SCRS list)

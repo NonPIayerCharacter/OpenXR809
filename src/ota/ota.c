@@ -127,6 +127,8 @@ static ota_status_t ota_update_image_process(image_seq_t seq, void *url,
 	OTA_SYSLOG("OTA: erase flash...\n");
 
 	if (flash_erase(flash, addr, img_max_size) != 0) {
+		OTA_SYSLOG("OTA: erase flash has failed. OTA failed.\n");
+		OTA_SYSLOG("OTA: check adr %i and ofs %i.\n", addr, img_max_size);
 		return ret;
 	}
 

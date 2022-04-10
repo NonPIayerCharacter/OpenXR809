@@ -130,6 +130,8 @@ int flash_erase(uint32_t flash, uint32_t addr, uint32_t size)
 	uint32_t start;
 	HAL_Status status;
 
+	FLASH_DBG("flash_erase called for %i size %i\n", addr, size);
+
 	if (HAL_Flash_Open(flash, FLASH_OPEN_TIMEOUT) != HAL_OK) {
 		FLASH_ERR("open %d fail\n", flash);
 		return -1;
