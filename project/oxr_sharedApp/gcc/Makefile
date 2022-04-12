@@ -42,6 +42,13 @@ SRCS += ../shared/src/tiny_crc8
 SRCS += ../shared/src/new_cmd
 SRCS += ../shared/src/drv_tuyaMCU
 SRCS += ../shared/src/new_tokenizer
+SRCS += ../shared/src/drv_uart
+SRCS += ../shared/src/drv_main
+SRCS += ../shared/src/i2c/drv_i2c_main
+SRCS += ../shared/src/i2c/drv_i2c_mcp23017
+SRCS += ../shared/src/i2c/drv_i2c_tc74
+SRCS += ../shared/src/ntp_time
+SRCS += ../shared/src/drv_bl0942
 
 
 $(info    Now will print SCRS list)

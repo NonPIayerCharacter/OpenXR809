@@ -141,10 +141,14 @@ static void setupOpenAccessPoint() {
 #define MAX_DUMP_BUFF_SIZE 256
 char dump_buffer[MAX_DUMP_BUFF_SIZE];
 
-// stub
-void I2C_OnChannelChanged(int ch, int iVal) {
 
+int Main_IsConnectedToWiFi() {
+	return 1;
 }
+// stub
+//void I2C_OnChannelChanged(int ch, int iVal) {
+//
+//}
 void RESET_ScheduleModuleReset(int delaySeconds) {
 
 

@@ -251,6 +251,26 @@
 			Name="Shared Files"
 			>
 			<File
+				RelativePath=".\shared\src\i2c\drv_i2c_local.h"
+				>
+			</File>
+			<File
+				RelativePath=".\shared\src\i2c\drv_i2c_main.c"
+				>
+			</File>
+			<File
+				RelativePath=".\shared\src\i2c\drv_i2c_mcp23017.c"
+				>
+			</File>
+			<File
+				RelativePath=".\shared\src\i2c\drv_i2c_mcp23017.h"
+				>
+			</File>
+			<File
+				RelativePath=".\shared\src\i2c\drv_i2c_tc74.c"
+				>
+			</File>
+			<File
 				RelativePath=".\shared\src\drv_tuyaMCU.c"
 				>
 			</File>
