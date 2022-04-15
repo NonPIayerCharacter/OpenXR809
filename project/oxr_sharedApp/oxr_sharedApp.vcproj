@@ -167,6 +167,10 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
+				RelativePath=".\shared\src\obk_config.h"
+				>
+			</File>
+			<File
 				RelativePath=".\prj_config.h"
 				>
 			</File>
@@ -284,6 +288,14 @@
 			</File>
 			<File
 				RelativePath=".\shared\src\flash_config\flash_config.h"
+				>
+			</File>
+			<File
+				RelativePath=".\shared\src\flash_config\flash_vars.c"
+				>
+			</File>
+			<File
+				RelativePath=".\shared\src\flash_config\flash_vars_vars.c"
 				>
 			</File>
 			<File

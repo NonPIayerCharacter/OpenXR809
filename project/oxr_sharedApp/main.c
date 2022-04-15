@@ -113,19 +113,6 @@ void xr809_do_ota_next_frame(const char *s) {
 char dump_buffer[MAX_DUMP_BUFF_SIZE];
 
 
-
-static char g_ipStr[32];
-const char *getMyIp() {
-	strcpy(g_ipStr,inet_ntoa(g_wlan_netif->ip_addr));
-
-	return g_ipStr;
-}
-const char *getMACStr(char *macstr) {
-	unsigned char mac[32];
-	WiFI_GetMacAddress((char *)mac);
-	sprintf(macstr,"%02X%02X%02X%02X%02X%02X",mac[0],mac[1],mac[2],mac[3],mac[4],mac[5]);
-	return macstr;
-}
 void bk_printf(char *format, ...){
     va_list vp;
 
