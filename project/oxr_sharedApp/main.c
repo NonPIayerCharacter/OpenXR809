@@ -87,72 +87,33 @@ void xr809_do_ota_next_frame(const char *s) {
 //void os_free(void *f) {
 //	free(f);
 //}
-int g_upTime = 0;
-int Time_getUpTimeSeconds()
-{
-	return g_upTime;
-}
-static void helloworld_task(void *arg)
-{
-	printf("helloworld_task start...\n");
-
-	while (1) {
-		OS_Sleep(1);
-		MQTT_RunEverySecondUpdate();
-		g_upTime++;
-		if(g_xr809_ota_request[0] != 0) {
-			printf("XR809 main loop now is starting OTA!\n");
-			OS_MSleep(10);
-			printf("URL %s\n",g_xr809_ota_request);
-			OS_MSleep(10);
-			cmd_ota_http_exec(xr809_do_ota_next_frame);
-			break;
-		}
-	}
-
-	printf("helloworld_task exit\n");
-	OS_ThreadDelete(&g_helloworld_thread);
-}
-static void connectToWiFi(const char *ssid, const char *psk)
-{
-	wlan_ap_disable();
-	net_switch_mode(WLAN_MODE_STA);
-
-	/* set ssid and password to wlan */
-	wlan_sta_set((uint8_t *)ssid, strlen(ssid), (uint8_t *)psk);
-
-	/* start scan and connect to ap automatically */
-	wlan_sta_enable();
-
-	//OS_Sleep(60);
-	printf("ok set wifii\n\r");
-}
-static void setupOpenAccessPoint() {
-	char ap_ssid[32];
-	char ap_psk[] = "12345678";
-
-	net_switch_mode(WLAN_MODE_HOSTAP);
-	wlan_ap_disable();
-	snprintf((char *)ap_ssid, sizeof(ap_ssid), "xr-ap-12345");
-	wlan_ap_set((uint8_t *)ap_ssid, strlen(ap_ssid), (uint8_t *)ap_psk);
-	wlan_ap_enable();
-}
+//static void helloworld_task(void *arg)
+//{
+//	printf("helloworld_task start...\n");
+//
+//	while (1) {
+//		OS_Sleep(1);
+//		MQTT_RunEverySecondUpdate();
+//		g_upTime++;
+//		if(g_xr809_ota_request[0] != 0) {
+//			printf("XR809 main loop now is starting OTA!\n");
+//			OS_MSleep(10);
+//			printf("URL %s\n",g_xr809_ota_request);
+//			OS_MSleep(10);
+//			cmd_ota_http_exec(xr809_do_ota_next_frame);
+//			break;
+//		}
+//	}
+//
+//	printf("helloworld_task exit\n");
+//	OS_ThreadDelete(&g_helloworld_thread);
+//}
 
 #define MAX_DUMP_BUFF_SIZE 256
 char dump_buffer[MAX_DUMP_BUFF_SIZE];
 
 
-int Main_IsConnectedToWiFi() {
-	return 1;
-}
-// stub
-//void I2C_OnChannelChanged(int ch, int iVal) {
-//
-//}
-void RESET_ScheduleModuleReset(int delaySeconds) {
 
-
-}
 static char g_ipStr[32];
 const char *getMyIp() {
 	strcpy(g_ipStr,inet_ntoa(g_wlan_netif->ip_addr));
@@ -174,37 +135,11 @@ void bk_printf(char *format, ...){
 
 	printf("%s\r\n",dump_buffer);
 }
-//
-//char dump_buffer[MAX_DUMP_BUFF_SIZE];
-//
-//void addLog(char *format, ...){
-//    va_list vp;
-//
-//    va_start(vp, format);
-//    vsnprintf(dump_buffer, MAX_DUMP_BUFF_SIZE, format, vp);
-//    va_end(vp);
-//
-//	printf("%s\r\n",dump_buffer);
-//}
-//
-//void addLogAdv(int level, int feature, char *format, ...){
-//    va_list vp;
-//
-//    va_start(vp, format);
-//    vsnprintf(dump_buffer, MAX_DUMP_BUFF_SIZE, format, vp);
-//    va_end(vp);
-//
-//	printf("%s\r\n",dump_buffer);
-//}
+
 int main(void)
 {
 	int res;
 	sysinfo_t *inf;
-	int bForceOpenAP;
-	const char *wifi_ssid;
-	const char *wifi_pass;
-
-	bForceOpenAP = 0;
 
 	platform_init();
 
@@ -250,52 +185,9 @@ int main(void)
 			
 	OS_MSleep(10);
 
-	CFG_InitAndLoad();
+void user_main(void);
 
-	PIN_Init();
-	init_rest();
-	//CFG_SetMQTTHost(DEFAULT_MQTT_IP);
-	//CFG_SetMQTTUserName(DEFAULT_MQTT_USER);
-	//CFG_SetMQTTPass(DEFAULT_MQTT_PASS);
-
-	//PIN_SetPinRoleForPinIndex(0, IOR_Relay);
-	//PIN_SetPinChannelForPinIndex(0,1);
-
-	OS_MSleep(10);
-	wifi_ssid = CFG_GetWiFiSSID();
-	wifi_pass = CFG_GetWiFiPass();
-#if 0
-	// you can use this if you bricked your module by setting wrong access point data
-	wifi_ssid = "qqqqqqqqqq";
-	wifi_pass = "Fqqqqqqqqqqqqqqqqqqqqqqqqqqq"
-#endif
-#ifdef SPECIAL_UNBRICK_ALWAYS_OPEN_AP
-	// you can use this if you bricked your module by setting wrong access point data
-	bForceOpenAP = 1;
-#endif
-	if(*wifi_ssid == 0 || *wifi_pass == 0 || bForceOpenAP) {
-		setupOpenAccessPoint();
-	} else {
-		connectToWiFi(wifi_ssid,wifi_pass);
-	}
-
-	OS_MSleep(10);
-
-	start_tcp_http();
-
-	OS_MSleep(10);
-
-
-	/* start helloworld task */
-	if (OS_ThreadCreate(&g_helloworld_thread,
-		                "helloworld",
-		                helloworld_task,
-		                NULL,
-		                OS_THREAD_PRIO_CONSOLE,
-		                HELLOWORLD_THREAD_STACK_SIZE) != OS_OK) {
-		printf("create serial task failed\n");
-		return 1;
-	}
+	user_main();
 
 	return 0;
 }

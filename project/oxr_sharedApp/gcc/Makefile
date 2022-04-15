@@ -31,25 +31,38 @@ SRCS += ../shared/src/new_cfg
 SRCS += ../shared/src/new_pins
 SRCS += ../shared/src/new_common
 SRCS += ../shared/src/new_builtin_devices
+
 SRCS += ../shared/src/httpserver/new_http
 SRCS += ../shared/src/httpserver/http_tcp_server
 SRCS += ../shared/src/httpserver/http_fns
 SRCS += ../shared/src/httpserver/rest_interface
+
 SRCS += ../shared/src/logging/logging
 SRCS += ../shared/src/jsmn/jsmn
 SRCS += ../shared/src/mqtt/new_mqtt
 SRCS += ../shared/src/tiny_crc8
-SRCS += ../shared/src/new_cmd
-SRCS += ../shared/src/drv_tuyaMCU
-SRCS += ../shared/src/new_tokenizer
-SRCS += ../shared/src/drv_uart
-SRCS += ../shared/src/drv_main
+
+SRCS += ../shared/src/cmnds/cmd_main
+SRCS += ../shared/src/cmnds/cmd_newLEDDriver
+SRCS += ../shared/src/cmnds/cmd_repeatingEvents
+SRCS += ../shared/src/cmnds/cmd_tasmota
+SRCS += ../shared/src/cmnds/cmd_test
+SRCS += ../shared/src/cmnds/cmd_tokenizer
+
+SRCS += ../shared/src/driver/drv_bl0942
+SRCS += ../shared/src/driver/drv_main
+SRCS += ../shared/src/driver/drv_ntp
+SRCS += ../shared/src/driver/drv_tuyaMCU
+SRCS += ../shared/src/driver/drv_uart
+
 SRCS += ../shared/src/i2c/drv_i2c_main
 SRCS += ../shared/src/i2c/drv_i2c_mcp23017
 SRCS += ../shared/src/i2c/drv_i2c_tc74
-SRCS += ../shared/src/ntp_time
-SRCS += ../shared/src/drv_bl0942
 
+SRCS += ../shared/src/hal/hal_wifi_xr809
+SRCS += ../shared/src/hal/hal_generic_xr809
+
+SRCS += ../shared/src/user_main
 
 $(info    Now will print SCRS list)
 $(info    SRCS is $(SRCS))
