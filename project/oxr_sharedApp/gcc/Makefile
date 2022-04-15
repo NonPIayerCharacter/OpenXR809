@@ -61,6 +61,7 @@ SRCS += ../shared/src/i2c/drv_i2c_tc74
 
 SRCS += ../shared/src/hal/hal_wifi_xr809
 SRCS += ../shared/src/hal/hal_generic_xr809
+SRCS += ../shared/src/hal/hal_main_xr809
 
 SRCS += ../shared/src/user_main
 
