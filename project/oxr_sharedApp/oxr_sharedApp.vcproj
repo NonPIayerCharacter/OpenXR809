@@ -467,6 +467,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\common\framework\net_ctrl.c"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\ota\ota.c"
 				>
 			</File>

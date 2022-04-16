@@ -136,39 +136,9 @@ int main(void)
 
 	OS_MSleep(10);
 
-	res = sysinfo_init();
-	if(res != 0) {
-		printf("sysinfo_init error - %i!\n\r",res);
-	}
-	res = sysinfo_load();
-	if(res != 0) {
-		printf("sysinfo_load error - %i!\n\r",res);
-	}
-	inf = sysinfo_get();
-	if(inf == 0) {
-		printf("sysinfo_get returned 0!\n\r");
-	}
-	if(inf->checksum != sysinfo_checksum(inf)) {
-		printf("sysinfo checksum invalid, resetting!\n\r");
-		inf->wlan_sta_param.ssid[0] = 0;
-		inf->wlan_sta_param.psk[0] = 0;
-		memset(&inf->pins,0,sizeof(inf->pins));
-		strcpy(inf->mqtt_param.brokerName,"brokerName");
-		strcpy(inf->mqtt_param.userName,"userName");
-		strcpy(inf->mqtt_param.hostName,"192.168.0.123");
-		strcpy(inf->mqtt_param.pass,"P@ssw0rd");
-		inf->mqtt_param.port = 1883;
-		sysinfo_save_wrapper();
-	} else {
-		printf("sysinfo checksum OK, loading!\n\r");
-	}
-	OS_MSleep(10);
-
 	printf("PRJCONF_SYSINFO_ADDR %i\n\r",PRJCONF_SYSINFO_ADDR);
 	printf("SYSINFO_SSID_LEN_MAX %i\n\r",SYSINFO_SSID_LEN_MAX);
 	OS_MSleep(10);
-	printf("inf->wlan_sta_param.ssid %s\n\r",inf->wlan_sta_param.ssid);
-	printf("inf->wlan_sta_param.psk %s\n\r",inf->wlan_sta_param.psk);
 			
 	OS_MSleep(10);
 

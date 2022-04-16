@@ -311,10 +311,16 @@ void net_config(struct netif *nif, uint8_t bring_up)
 			memcpy(&net_conf.gw, &sysinfo->netif_sta_param.gateway, sizeof(net_conf.gw));
 		}
 	} else if (sysinfo->wlan_mode == WLAN_MODE_HOSTAP) {
-		net_conf.use_dhcp = 0;
+		net_conf.use_dhcp = 0;			
+		IP4_ADDR(&sysinfo->netif_ap_param.ip_addr, 192, 168, 4, 1);
+		IP4_ADDR(&sysinfo->netif_ap_param.net_mask, 255, 255, 255, 0);
+		IP4_ADDR(&sysinfo->netif_ap_param.gateway, 192, 168, 4, 1);
+
 		memcpy(&net_conf.ipaddr, &sysinfo->netif_ap_param.ip_addr, sizeof(net_conf.ipaddr));
 		memcpy(&net_conf.netmask, &sysinfo->netif_ap_param.net_mask, sizeof(net_conf.netmask));
 		memcpy(&net_conf.gw, &sysinfo->netif_ap_param.gateway, sizeof(net_conf.gw));
+
+
 	} else {
 		NET_ERR("invalid wlan mode %d\n", sysinfo->wlan_mode);
 		return;
