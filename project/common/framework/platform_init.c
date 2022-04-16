@@ -34,7 +34,6 @@
 #include "image/image.h"
 
 #include "common/board/board.h"
-#include "sysinfo.h"
 #if PRJCONF_NET_EN
 #include "net_ctrl.h"
 #endif
@@ -282,6 +281,7 @@ __weak void platform_init_level0(void)
 #endif
 }
 
+extern int g_wlan_mode;
 /* init standard platform hardware and services */
 __weak void platform_init_level1(void)
 {
@@ -307,8 +307,6 @@ __weak void platform_init_level1(void)
 	platform_prng_init_seed(); /* init prng seed */
 #endif
 
-	sysinfo_init();
-
 #if PRJCONF_CONSOLE_EN
 	console_param_t cparam;
 	cparam.uart_id = BOARD_MAIN_UART_ID;
@@ -324,8 +322,7 @@ __weak void platform_init_level1(void)
 #if PRJCONF_NET_EN
 	net_sys_init();
 
-	struct sysinfo *sysinfo = sysinfo_get();
-	net_sys_start(sysinfo->wlan_mode);
+	net_sys_start(g_wlan_mode);
 
   #if PRJCONF_NET_PM_EN
 	pm_register_wlan_power_onoff(net_sys_onoff, PRJCONF_NET_PM_MODE);

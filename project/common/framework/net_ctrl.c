@@ -39,9 +39,10 @@
 #include "net/udhcp/usr_dhcpd.h"
 
 #include "common/framework/sys_ctrl/sys_ctrl.h"
-#include "common/framework/sysinfo.h"
 #include "net_ctrl.h"
 #include "net_ctrl_debug.h"
+
+int g_wlan_mode = 0;
 
 struct netif_conf {
     uint8_t     bring_up;   // bring up or down
@@ -291,38 +292,32 @@ static void netif_config(struct netif *nif, struct netif_conf *conf)
 /* bring up/down network */
 void net_config(struct netif *nif, uint8_t bring_up)
 {
-	struct sysinfo *sysinfo = sysinfo_get();
-	if (sysinfo == NULL) {
-		NET_ERR("failed to get sysinfo %p\n", sysinfo);
-		return;
-	}
+
 
 	struct netif_conf net_conf;
 	memset(&net_conf, 0, sizeof(struct netif_conf));
 	net_conf.bring_up = bring_up;
 
-	if (sysinfo->wlan_mode == WLAN_MODE_STA) {
-		if (sysinfo->sta_use_dhcp) {
+	if (g_wlan_mode == WLAN_MODE_STA) {
+		if (1) {
 			net_conf.use_dhcp = 1;
 		} else {
 			net_conf.use_dhcp = 0;
-			memcpy(&net_conf.ipaddr, &sysinfo->netif_sta_param.ip_addr, sizeof(net_conf.ipaddr));
-			memcpy(&net_conf.netmask, &sysinfo->netif_sta_param.net_mask, sizeof(net_conf.netmask));
-			memcpy(&net_conf.gw, &sysinfo->netif_sta_param.gateway, sizeof(net_conf.gw));
+			// TODO
+			IP4_ADDR(&net_conf.ipaddr, 192, 168, 0, 211);
+			IP4_ADDR(&net_conf.netmask, 255, 255, 255, 0);
+			IP4_ADDR(&net_conf.gw, 192, 168, 0, 1);
 		}
-	} else if (sysinfo->wlan_mode == WLAN_MODE_HOSTAP) {
+	} else if (g_wlan_mode == WLAN_MODE_HOSTAP) {
 		net_conf.use_dhcp = 0;			
-		IP4_ADDR(&sysinfo->netif_ap_param.ip_addr, 192, 168, 4, 1);
-		IP4_ADDR(&sysinfo->netif_ap_param.net_mask, 255, 255, 255, 0);
-		IP4_ADDR(&sysinfo->netif_ap_param.gateway, 192, 168, 4, 1);
+		IP4_ADDR(&net_conf.ipaddr, 192, 168, 4, 1);
+		IP4_ADDR(&net_conf.netmask, 255, 255, 255, 0);
+		IP4_ADDR(&net_conf.gw, 192, 168, 4, 1);
 
-		memcpy(&net_conf.ipaddr, &sysinfo->netif_ap_param.ip_addr, sizeof(net_conf.ipaddr));
-		memcpy(&net_conf.netmask, &sysinfo->netif_ap_param.net_mask, sizeof(net_conf.netmask));
-		memcpy(&net_conf.gw, &sysinfo->netif_ap_param.gateway, sizeof(net_conf.gw));
 
 
 	} else {
-		NET_ERR("invalid wlan mode %d\n", sysinfo->wlan_mode);
+		NET_ERR("invalid wlan mode %d\n", g_wlan_mode);
 		return;
 	}
 
@@ -369,10 +364,7 @@ struct netif *net_open(enum wlan_mode mode)
 
 	wlan_start(nif);
 
-	struct sysinfo *sysinfo = sysinfo_get();
-	if (sysinfo) {
-		sysinfo->wlan_mode = mode;
-	}
+	g_wlan_mode = mode;
 
 	return nif;
 }

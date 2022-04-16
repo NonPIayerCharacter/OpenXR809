@@ -126,7 +126,6 @@ void bk_printf(char *format, ...){
 int main(void)
 {
 	int res;
-	sysinfo_t *inf;
 
 	platform_init();
 

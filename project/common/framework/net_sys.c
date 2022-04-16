@@ -39,7 +39,6 @@
 #include "lwip/tcpip.h"
 #include "net/udhcp/usr_dhcpd.h"
 
-#include "common/framework/sysinfo.h"
 #include "common/board/board.h"
 #include "net_ctrl.h"
 #include "net_ctrl_debug.h"
@@ -91,11 +90,7 @@ static int net_sys_callback(uint32_t param0, uint32_t param1)
 
 int net_sys_start(enum wlan_mode mode)
 {
-	struct sysinfo *sysinfo = sysinfo_get();
-	if (sysinfo == NULL) {
-		NET_ERR("failed to get sysinfo %p\n", sysinfo);
-		return -1;
-	}
+
 
 	struct wlan_sys_boot_cfg cfg;
 	cfg.chip_ver = HAL_GlobalGetChipVer();
@@ -114,7 +109,6 @@ int net_sys_start(enum wlan_mode mode)
 	}
 
 #ifndef __PRJ_CONFIG_ETF_CLI
-	wlan_set_mac_addr(sysinfo->mac_addr, SYSINFO_MAC_ADDR_LEN);
 	g_wlan_netif = net_open(mode);
 #endif
 	return 0;
@@ -140,19 +134,15 @@ int net_sys_stop(void)
 
 	return 0;
 }
-
+extern int g_wlan_mode;
 int net_sys_onoff(unsigned int enable)
 {
-	struct sysinfo *sysinfo = sysinfo_get();
-	if (sysinfo == NULL) {
-		NET_ERR("failed to get sysinfo %p\n", sysinfo);
-		return -1;
-	}
+	
 
 	printf("%s set net to power%s\n", __func__, enable?"on":"off");
 
 	if (enable) {
-		net_sys_start(sysinfo->wlan_mode);
+		net_sys_start(g_wlan_mode);
 #ifdef CONFIG_AUTO_RECONNECT_AP
 		net_ctrl_connect_ap(NULL);
 #endif

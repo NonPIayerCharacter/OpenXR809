@@ -41,7 +41,6 @@
 #include "net/wlan/wlan_defs.h"
 #include "smartlink/sc_assistant.h"
 
-#include "sysinfo.h"
 #include "net_ctrl.h"
 
 #define SCA_DEBUG_LEVEL 1
@@ -77,12 +76,12 @@ static uint8_t stop_connect_ap = 0;
 
 static uint8_t *__sc_assistant_get_mac(uint8_t *mac_hex)
 {
-	struct sysinfo *sysinfo;
-
-	SCA_BUG_ON(!mac_hex);
-
-	sysinfo = sysinfo_get();
-	memcpy(mac_hex, sysinfo->mac_addr, IEEE80211_ADDR_LEN);
+	mac_hex[0] = 0xAB;
+	mac_hex[1] = 0xCD;
+	mac_hex[2] = 0xEF;
+	mac_hex[3] = 0x12;
+	mac_hex[4] = 0x34;
+	mac_hex[5] = 0x56;
 
 	return mac_hex;
 }
