@@ -90,6 +90,8 @@ enum cmd_status cmd_ota_http_exec(char *cmd)
 		return CMD_STATUS_INVALID_ARG;
 	}
 
+	printf("Entered cmd_ota_http_exec with arg %s\n\r",cmd);
+
 	cmd_write_respond(CMD_STATUS_OK, "OK");
 
 	if (ota_get_image(OTA_PROTOCOL_HTTP, cmd) != OTA_STATUS_OK) {
@@ -97,11 +99,14 @@ enum cmd_status cmd_ota_http_exec(char *cmd)
 		return CMD_STATUS_ACKED;
 	}
 
+	printf("OTA - ota_get_image - OK, now will verify\n\r");
 	if (ota_get_verify_data(&verify_data) != OTA_STATUS_OK) {
+		printf("ota_get_verify_data not ok, OTA_VERIFY_NONE\n\r");
 		verify_type = OTA_VERIFY_NONE;
 		verify_value = NULL;
 	} else {
 		verify_type = verify_data.ov_type;
+		printf("ota_get_verify_data ok\n\r");
 		verify_value = (uint32_t*)(verify_data.ov_data);
 	}
 
