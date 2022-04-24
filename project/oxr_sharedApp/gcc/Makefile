@@ -48,6 +48,8 @@ SRCS += ../shared/src/cmnds/cmd_repeatingEvents
 SRCS += ../shared/src/cmnds/cmd_tasmota
 SRCS += ../shared/src/cmnds/cmd_test
 SRCS += ../shared/src/cmnds/cmd_tokenizer
+SRCS += ../shared/src/cmnds/cmd_eventHandlers
+SRCS += ../shared/src/cmnds/cmd_channels
 
 SRCS += ../shared/src/driver/drv_bl0942
 SRCS += ../shared/src/driver/drv_main
@@ -58,6 +60,7 @@ SRCS += ../shared/src/driver/drv_uart
 SRCS += ../shared/src/i2c/drv_i2c_main
 SRCS += ../shared/src/i2c/drv_i2c_mcp23017
 SRCS += ../shared/src/i2c/drv_i2c_tc74
+SRCS += ../shared/src/i2c/drv_i2c_lcd_pcf8574t
 
 SRCS += ../shared/src/hal/xr809/hal_wifi_xr809
 SRCS += ../shared/src/hal/xr809/hal_generic_xr809
