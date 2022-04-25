@@ -41,6 +41,7 @@ SRCS += ../shared/src/logging/logging
 SRCS += ../shared/src/jsmn/jsmn
 SRCS += ../shared/src/mqtt/new_mqtt
 SRCS += ../shared/src/tiny_crc8
+SRCS += ../shared/src/new_ping
 
 SRCS += ../shared/src/cmnds/cmd_main
 SRCS += ../shared/src/cmnds/cmd_newLEDDriver
