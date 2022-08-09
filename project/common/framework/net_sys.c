@@ -87,9 +87,10 @@ static int net_sys_callback(uint32_t param0, uint32_t param1)
 	}
 	return 0;
 }
-
+void CFG_InitAndLoad();
 int net_sys_start(enum wlan_mode mode)
 {
+	unsigned char mac[6];
 
 
 	struct wlan_sys_boot_cfg cfg;
@@ -109,6 +110,9 @@ int net_sys_start(enum wlan_mode mode)
 	}
 
 #ifndef __PRJ_CONFIG_ETF_CLI
+	CFG_InitAndLoad();
+	WiFI_GetMacAddress(mac);
+	wlan_set_mac_addr(mac,6);
 	g_wlan_netif = net_open(mode);
 #endif
 	return 0;

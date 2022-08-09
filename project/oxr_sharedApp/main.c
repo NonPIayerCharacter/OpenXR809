@@ -122,6 +122,8 @@ void bk_printf(char *format, ...){
 
 	printf("%s\r\n",dump_buffer);
 }
+void user_main(void);
+void Main_Init(void);
 
 int main(void)
 {
@@ -141,7 +143,7 @@ int main(void)
 			
 	OS_MSleep(10);
 
-void user_main(void);
+	Main_Init();
 
 	user_main();
 
