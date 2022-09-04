@@ -52,7 +52,6 @@ SUBDIRS += driver/component \
 	audio/manager \
 	$(NET_SUBDIRS) \
 	$(AT_SUBDIRS) \
-	cjson \
 	util
 endif
 
