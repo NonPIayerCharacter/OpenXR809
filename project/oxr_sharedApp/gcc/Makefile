@@ -33,6 +33,7 @@ SRCS += ../shared/src/new_common
 SRCS += ../shared/src/new_builtin_devices
 SRCS += ../shared/src/rgb2hsv
 
+SRCS += ../shared/src/httpserver/hass
 SRCS += ../shared/src/httpserver/new_http
 SRCS += ../shared/src/httpserver/http_tcp_server
 SRCS += ../shared/src/httpserver/http_fns
@@ -53,6 +54,8 @@ SRCS += ../shared/src/cmnds/cmd_tasmota
 SRCS += ../shared/src/cmnds/cmd_tcp
 SRCS += ../shared/src/cmnds/cmd_test
 SRCS += ../shared/src/cmnds/cmd_tokenizer
+
+SRCS += ../shared/src/cJSON/cJSON
 
 SRCS += ../shared/src/driver/drv_bl0942
 SRCS += ../shared/src/driver/drv_main
