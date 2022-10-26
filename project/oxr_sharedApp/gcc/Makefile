@@ -54,6 +54,7 @@ SRCS += ../shared/src/cmnds/cmd_repeatingEvents
 SRCS += ../shared/src/cmnds/cmd_tasmota
 SRCS += ../shared/src/cmnds/cmd_tcp
 SRCS += ../shared/src/cmnds/cmd_test
+SRCS += ../shared/src/cmnds/cmd_if
 SRCS += ../shared/src/cmnds/cmd_tokenizer
 
 SRCS += ../shared/src/cJSON/cJSON
