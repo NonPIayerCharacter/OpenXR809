@@ -50,6 +50,7 @@ SRCS += ../shared/src/cmnds/cmd_channels
 SRCS += ../shared/src/cmnds/cmd_eventHandlers
 SRCS += ../shared/src/cmnds/cmd_main
 SRCS += ../shared/src/cmnds/cmd_newLEDDriver
+SRCS += ../shared/src/cmnds/cmd_newLEDDriver_colors
 SRCS += ../shared/src/cmnds/cmd_repeatingEvents
 SRCS += ../shared/src/cmnds/cmd_tasmota
 SRCS += ../shared/src/cmnds/cmd_tcp
