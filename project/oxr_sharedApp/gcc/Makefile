@@ -38,6 +38,7 @@ SRCS += ../shared/src/httpserver/new_http
 SRCS += ../shared/src/httpserver/http_tcp_server
 SRCS += ../shared/src/httpserver/http_fns
 SRCS += ../shared/src/httpserver/rest_interface
+SRCS += ../shared/src/httpserver/json_interface
 
 SRCS += ../shared/src/logging/logging
 SRCS += ../shared/src/jsmn/jsmn
