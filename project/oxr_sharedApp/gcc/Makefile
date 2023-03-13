@@ -30,7 +30,6 @@ SRCS := $(basename $(foreach dir,$(DIRS),$(wildcard $(dir)/*.[csS])))
 SRCS += ../shared/src/new_cfg
 SRCS += ../shared/src/new_pins
 SRCS += ../shared/src/new_common
-SRCS += ../shared/src/new_builtin_devices
 SRCS += ../shared/src/rgb2hsv
 
 SRCS += ../shared/src/httpserver/hass
