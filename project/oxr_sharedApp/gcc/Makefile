@@ -33,6 +33,7 @@ SRCS += ../shared/src/new_common
 SRCS += ../shared/src/rgb2hsv
 
 SRCS += ../shared/src/httpserver/hass
+SRCS += ../shared/src/httpserver/http_basic_auth
 SRCS += ../shared/src/httpserver/new_http
 SRCS += ../shared/src/httpserver/http_tcp_server
 SRCS += ../shared/src/httpserver/http_fns
@@ -59,6 +60,7 @@ SRCS += ../shared/src/cmnds/cmd_if
 SRCS += ../shared/src/cmnds/cmd_tokenizer
 
 SRCS += ../shared/src/cJSON/cJSON
+SRCS += ../shared/src/base64/base64
 
 SRCS += ../shared/src/driver/drv_bl0942
 SRCS += ../shared/src/driver/drv_main
