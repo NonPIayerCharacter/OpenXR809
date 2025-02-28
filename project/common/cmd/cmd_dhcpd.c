@@ -34,8 +34,8 @@
 #include "net/udhcp/usr_dhcpd.h"
 #include "lwip/inet.h"
 
-#define CMD_DHCPD_ADDR_START "192.168.4.100"
-#define CMD_DHCPD_ADDR_END   "192.168.4.150"
+#define CMD_DHCPD_ADDR_START "192.168.51.100"
+#define CMD_DHCPD_ADDR_END   "192.168.51.150"
 
 static struct dhcp_server_info dhcpd_info;
 
