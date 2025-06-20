@@ -263,6 +263,7 @@ ifeq ($(__CONFIG_BIN_COMPRESS), y)
 endif
 	cd $(IMAGE_PATH) && \
 	chmod a+r *.bin && \
+	($(IMAGE_TOOL) $(IMAGE_TOOL_OPT) -c $(IMAGE_CFG) -o $(IMAGE_NAME).img || true) && \
 	$(IMAGE_TOOL) $(IMAGE_TOOL_OPT) -c $(IMAGE_CFG) -o $(IMAGE_NAME).img
 
 image_clean:
