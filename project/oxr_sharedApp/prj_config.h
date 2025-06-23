@@ -45,7 +45,7 @@ extern "C" {
 #define PRJCONF_MAIN_THREAD_PRIO        OS_THREAD_PRIO_APP
 
 /* main thread stack size */
-#define PRJCONF_MAIN_THREAD_STACK_SIZE  (1 * 1024)
+#define PRJCONF_MAIN_THREAD_STACK_SIZE  (2 * 1024)
 
 /* sys ctrl enable/disable */
 #define PRJCONF_SYS_CTRL_EN             1
@@ -66,10 +66,10 @@ extern "C" {
 #define PRJCONF_IMG_ADDR                0x00000000
 
 /* image max size, including bootloader */
-#define PRJCONF_IMG_MAX_SIZE            ((1024 - 4) * 1024)
+#define PRJCONF_IMG_MAX_SIZE            0xD0000
 
 /* save sysinfo to flash or not */
-#define PRJCONF_SYSINFO_SAVE_TO_FLASH	1
+#define PRJCONF_SYSINFO_SAVE_TO_FLASH	0
 
 #if PRJCONF_SYSINFO_SAVE_TO_FLASH
 
@@ -91,7 +91,7 @@ extern "C" {
 #define PRJCONF_MAC_ADDR_SOURCE         SYSINFO_MAC_ADDR_CHIPID
 
 /* watchdog enable/disable */
-#define PRJCONF_WDG_EN                  1
+#define PRJCONF_WDG_EN                  0
 
 /* watchdog timeout value */
 #define PRJCONF_WDG_TIMEOUT             WDG_TIMEOUT_16SEC
@@ -107,7 +107,7 @@ extern "C" {
 #define PRJCONF_UART_EN                 1
 
 /* h/w crypto engine enable/disable */
-#define PRJCONF_CE_EN                   1
+#define PRJCONF_CE_EN                   0
 
 /* spi enable/disable */
 #define PRJCONF_SPI_EN                  0

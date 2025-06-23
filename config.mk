@@ -40,7 +40,7 @@ __CONFIG_LIBC_SCANF_FLOAT ?= y
 __CONFIG_LIBC_WRAP_STDIO ?= y
 
 # heap managed by stdlib
-__CONFIG_MALLOC_USE_STDLIB ?= y
+__CONFIG_MALLOC_USE_STDLIB ?= n
 
 # trace heap memory usage and error when using malloc, free, etc.
 __CONFIG_MALLOC_TRACE ?= n

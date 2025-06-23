@@ -369,12 +369,34 @@ void *__wrap_malloc(size_t size)
 
 void *__wrap_realloc(void *ptr, size_t size)
 {
-#error "realloc() not support"
-	vPortFree(ptr);
-	return pvPortMalloc(size);
+	if(size == 0)
+	{
+		vPortFree(ptr);
+		return NULL;
+	}
+	void* p = pvPortMalloc(size);
+	if(p)
+	{
+		if(ptr != NULL)
+		{
+			memcpy(p, ptr, size);
+			vPortFree(ptr);
+		}
+	}
+	return p;
 }
 
 void __wrap_free(void *ptr)
+{
+	vPortFree(ptr);
+}
+
+void* os_malloc(size_t size)
+{
+	return pvPortMalloc(size);
+}
+
+void os_free(void* ptr)
 {
 	vPortFree(ptr);
 }
@@ -386,9 +408,21 @@ void *__wrap__malloc_r(struct _reent *reent, size_t size)
 
 void *__wrap__realloc_r(struct _reent *reent, void *ptr, size_t size)
 {
-#error "realloc() not support"
-	vPortFree(ptr);
-	return pvPortMalloc(size);
+	if(size == 0)
+	{
+		vPortFree(ptr);
+		return NULL;
+	}
+	void* p = pvPortMalloc(size);
+	if(p)
+	{
+		if(ptr != NULL)
+		{
+			memcpy(p, ptr, size);
+			vPortFree(ptr);
+		}
+	}
+	return p;
 }
 
 void __wrap__free_r(struct _reent *reent, void *ptr)
