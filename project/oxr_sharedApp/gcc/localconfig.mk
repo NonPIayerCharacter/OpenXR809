@@ -44,3 +44,5 @@ endif
 
 # enable OTA, default to n
 __PRJ_CONFIG_OTA := y
+
+export __CONFIG_BIN_COMPRESS := y

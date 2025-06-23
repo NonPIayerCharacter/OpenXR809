@@ -146,7 +146,7 @@ ifeq ($(__CONFIG_CHIP_SERIES_XR32), y)
   endif
 else
   ifeq ($(__CONFIG_CHIP_XR871), y)
-    XZ_DEFAULT_BINS += net.bin net_ap.bin net_wps.bin
+    XZ_DEFAULT_BINS += net.bin net_ap.bin
   endif
 endif
 XZ_BINS ?= $(XZ_DEFAULT_BINS)
@@ -217,7 +217,7 @@ endif
 
 objdump: $(PROJECT).objdump
 
-size:
+size: $(PROJECT).$(ELF_EXT)
 	$(Q)$(SIZE) $(PROJECT).$(ELF_EXT)
 
 clean:
@@ -259,11 +259,10 @@ image: install
 	$(Q)$(CP) -t $(IMAGE_PATH) $(BIN_FILES)
 ifeq ($(__CONFIG_BIN_COMPRESS), y)
 	cd $(IMAGE_PATH) && \
-	$(Q)$(XZ) $(XZ_BINS)
+	$(XZ) $(XZ_BINS)
 endif
 	cd $(IMAGE_PATH) && \
 	chmod a+r *.bin && \
-	($(IMAGE_TOOL) $(IMAGE_TOOL_OPT) -c $(IMAGE_CFG) -o $(IMAGE_NAME).img || true) && \
 	$(IMAGE_TOOL) $(IMAGE_TOOL_OPT) -c $(IMAGE_CFG) -o $(IMAGE_NAME).img
 
 image_clean:

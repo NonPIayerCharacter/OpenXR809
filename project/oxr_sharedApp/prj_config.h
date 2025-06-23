@@ -66,7 +66,7 @@ extern "C" {
 #define PRJCONF_IMG_ADDR                0x00000000
 
 /* image max size, including bootloader */
-#define PRJCONF_IMG_MAX_SIZE            0xD0000
+#define PRJCONF_IMG_MAX_SIZE            0xF0000
 
 /* save sysinfo to flash or not */
 #define PRJCONF_SYSINFO_SAVE_TO_FLASH	0
@@ -107,7 +107,7 @@ extern "C" {
 #define PRJCONF_UART_EN                 1
 
 /* h/w crypto engine enable/disable */
-#define PRJCONF_CE_EN                   0
+#define PRJCONF_CE_EN                   1
 
 /* spi enable/disable */
 #define PRJCONF_SPI_EN                  0

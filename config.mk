@@ -62,7 +62,7 @@ __CONFIG_MBUF_IMPL_MODE ?= 0
 __CONFIG_XIP_SECTION_FUNC_LEVEL ?= n
 
 # bin compression
-__CONFIG_BIN_COMPRESS ?= n
+__CONFIG_BIN_COMPRESS ?= y
 
 # enable/disable bootloader, y to enable bootloader and disable some features
 __CONFIG_BOOTLOADER ?= n
