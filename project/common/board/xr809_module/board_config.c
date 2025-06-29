@@ -55,7 +55,7 @@ static const GPIO_PinMuxParam g_pinmux_swd[] = {
 static const FlashBoardCfg g_flash_cfg[] = {
 	{
 		.type = FLASH_DRV_FLASHC,
-		.mode = FLASH_READ_DUAL_O_MODE,
+		.mode = FLASH_READ_QUAD_IO_MODE,
 		.flashc.clk = (48 * 1000 * 1000),
 	},
 };

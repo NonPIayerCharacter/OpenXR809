@@ -270,7 +270,7 @@
  * MEM_SIZE: the size of the heap memory. If the application will send
  * a lot of data that needs to be copied, this should be set high.
  */
-#define MEM_SIZE                        (24 * 1024)
+#define MEM_SIZE                        (10 * 1024)
 
 /**
  * MEMP_OVERFLOW_CHECK: memp overflow protection reserves a configurable
@@ -1523,7 +1523,7 @@
  * to all local matches if SO_REUSEADDR is turned on.
  * WARNING: Adds a memcpy for every packet if passing to more than one pcb!
  */
-#define SO_REUSE_RXTOALL                0
+#define SO_REUSE_RXTOALL                1
 
 /**
  * LWIP_FIONREAD_LINUXMODE==0 (default): ioctl/FIONREAD returns the amount of
@@ -1763,7 +1763,7 @@
 /**
  * LWIP_IPV6==1: Enable IPv6
  */
-#define LWIP_IPV6                       1
+#define LWIP_IPV6                       0
 
 /**
  * LWIP_IPV6_NUM_ADDRESSES: Number of IPv6 addresses per netif.
@@ -2139,14 +2139,14 @@
  * messages are written.
  * @see debugging_levels
  */
-#define LWIP_DBG_MIN_LEVEL              LWIP_DBG_LEVEL_ALL
+#define LWIP_DBG_MIN_LEVEL              LWIP_DBG_LEVEL_SEVERE
 
 /**
  * LWIP_DBG_TYPES_ON: A mask that can be used to globally enable/disable
  * debug messages of certain types.
  * @see debugging_levels
  */
-#define LWIP_DBG_TYPES_ON               LWIP_DBG_ON
+#define LWIP_DBG_TYPES_ON               LWIP_DBG_OFF
 
 /**
  * ETHARP_DEBUG: Enable debugging in etharp.c.

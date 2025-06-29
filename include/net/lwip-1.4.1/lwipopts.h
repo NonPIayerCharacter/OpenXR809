@@ -165,7 +165,7 @@
  * MEM_SIZE: the size of the heap memory. If the application will send
  * a lot of data that needs to be copied, this should be set high.
  */
-#define MEM_SIZE                        (24 * 1024)
+#define MEM_SIZE                        (10 * 1024)
 
 /**
  * MEMP_SEPARATE_POOLS: if defined to 1, each pool is placed in its own array.
@@ -1280,7 +1280,7 @@
  * to all local matches if SO_REUSEADDR is turned on.
  * WARNING: Adds a memcpy for every packet if passing to more than one pcb!
  */
-#define SO_REUSE_RXTOALL                0
+#define SO_REUSE_RXTOALL                1
 
 /*
    ----------------------------------------
@@ -1570,13 +1570,13 @@
  * compared against this value. If it is smaller, then debugging
  * messages are written.
  */
-#define LWIP_DBG_MIN_LEVEL              LWIP_DBG_LEVEL_ALL
+#define LWIP_DBG_MIN_LEVEL              LWIP_DBG_LEVEL_SEVERE
 
 /**
  * LWIP_DBG_TYPES_ON: A mask that can be used to globally enable/disable
  * debug messages of certain types.
  */
-#define LWIP_DBG_TYPES_ON               LWIP_DBG_ON
+#define LWIP_DBG_TYPES_ON               LWIP_DBG_OFF
 
 /**
  * ETHARP_DEBUG: Enable debugging in etharp.c.

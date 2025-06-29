@@ -187,6 +187,8 @@ SECTIONS
 		*project/common/iperf*.o (.text .text.* .rodata .rodata.*)
 		*project/common/framework*.o (.text .text.* .rodata .rodata.*)
 		*command.o (.text .text.* .rodata .rodata.*)
+		../shared*/be*.o (.text .text.* .rodata .rodata.*)
+		../shared/src*.o (.rodata .rodata.*)
 
 		*(.xip_text* .xip_rodata*)
     } > FLASH

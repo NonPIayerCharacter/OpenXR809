@@ -40,7 +40,7 @@ __CONFIG_LIBC_SCANF_FLOAT ?= y
 __CONFIG_LIBC_WRAP_STDIO ?= y
 
 # heap managed by stdlib
-__CONFIG_MALLOC_USE_STDLIB ?= y
+__CONFIG_MALLOC_USE_STDLIB ?= n
 
 # trace heap memory usage and error when using malloc, free, etc.
 __CONFIG_MALLOC_TRACE ?= n
@@ -62,7 +62,7 @@ __CONFIG_MBUF_IMPL_MODE ?= 0
 __CONFIG_XIP_SECTION_FUNC_LEVEL ?= n
 
 # bin compression
-__CONFIG_BIN_COMPRESS ?= n
+__CONFIG_BIN_COMPRESS ?= y
 
 # enable/disable bootloader, y to enable bootloader and disable some features
 __CONFIG_BOOTLOADER ?= n

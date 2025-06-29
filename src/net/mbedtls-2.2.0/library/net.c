@@ -432,7 +432,7 @@ int mbedtls_net_accept( mbedtls_net_context *bind_ctx,
 
             memcpy( client_ip, &addr4->sin_addr.s_addr, *ip_len );
         }
-#if !(defined(MBEDTLS_ON_LWIP) && defined(__CONFIG_LWIP_V1))
+#if !(defined(MBEDTLS_ON_LWIP) && defined(__CONFIG_LWIP_V1)) && LWIP_IPV6
         else
         {
             struct sockaddr_in6 *addr6 = (struct sockaddr_in6 *) &client_addr;

@@ -40,9 +40,9 @@ include $(ROOT_PATH)/config.mk
 # ----------------------------------------------------------------------------
 # options
 # ----------------------------------------------------------------------------
-QUIET ?= n
+QUIET ?= y
 OPTIMIZE := y
-MDK_DBG_EN := y
+MDK_DBG_EN := n
 HARDFP := n
 
 # building display
@@ -107,11 +107,11 @@ endif
 LD_FLAGS += -Wl,--wrap,main
 LD_FLAGS += -Wl,--wrap,exit
 
-ifneq ($(__CONFIG_MALLOC_USE_STDLIB), y)
+#ifneq ($(__CONFIG_MALLOC_USE_STDLIB), y)
 LD_FLAGS += -Wl,--wrap,malloc
 LD_FLAGS += -Wl,--wrap,realloc
 LD_FLAGS += -Wl,--wrap,free
-endif
+#endif
 LD_FLAGS += -Wl,--wrap,_malloc_r
 LD_FLAGS += -Wl,--wrap,_realloc_r
 LD_FLAGS += -Wl,--wrap,_free_r
@@ -176,16 +176,21 @@ PRJ_MAKE_RULES := $(ROOT_PATH)/project/project.mk
 # common rules of compiling objects
 # ----------------------------------------------------------------------------
 %.o: %.asm
+	@echo "compile_asm $<"
 	$(Q)$(CC) $(CPU) $(AS_SYMBOLS) -c -x assembler-with-cpp -o $@ $<
 
 %.o: %.s
+	@echo "compile_s $<"
 	$(Q)$(CC) $(CPU) $(AS_SYMBOLS) -c -x assembler-with-cpp -o $@ $<
 
 %.o: %.S
+	@echo "compile_S $<"
 	$(Q)$(CC) $(CPU) $(AS_SYMBOLS) -c -x assembler-with-cpp -o $@ $<
 
 %.o: %.c
+	@echo "compile_c $<"
 	$(Q)$(CC) $(CC_FLAGS) $(CC_SYMBOLS) -std=gnu99 $(INCLUDE_PATHS) -o $@ $<
 
 %.o: %.cpp
+	@echo "compile_cpp $<"
 	$(Q)$(CPP) $(CC_FLAGS) $(CC_SYMBOLS) -std=gnu++98 -fno-rtti $(INCLUDE_PATHS) -o $@ $<
